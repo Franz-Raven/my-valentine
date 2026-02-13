@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #071a25;
+  --foreground: rgba(255, 255, 255, 0.92);
+  --font-sans: var(--font-lexend);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #071a25;
+    --foreground: rgba(255, 255, 255, 0.92);
   }
 }
 
+html,
 body {
+  height: 100%;
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
+
+body {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.fw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  opacity: 0;
+  animation: fwPop 2600ms ease-out infinite;
+  filter: drop-shadow(0 0 18px rgba(255, 105, 180, 0.95));
+  will-change: transform, opacity;
+}
+
+.fw::before {
+  content: "";
+  position: absolute;
+  inset: -120px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,105,180,1) 0 3px, transparent 5px),
+    radial-gradient(circle at 78% 12%, rgba(255,105,180,.95) 0 3px, transparent 5px),
+    radial-gradient(circle at 96% 50%, rgba(255,105,180,.9) 0 3px, transparent 5px),
+    radial-gradient(circle at 78% 88%, rgba(255,105,180,.95) 0 3px, transparent 5px),
+    radial-gradient(circle at 50% 100%, rgba(255,105,180,1) 0 3px, transparent 5px),
+    radial-gradient(circle at 22% 88%, rgba(255,105,180,.95) 0 3px, transparent 5px),
+    radial-gradient(circle at 4% 50%, rgba(255,105,180,.9) 0 3px, transparent 5px),
+    radial-gradient(circle at 22% 12%, rgba(255,105,180,.95) 0 3px, transparent 5px);
+  transform: scale(0.45);
+  opacity: 1;
+}
+
+@keyframes fwPop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.15); }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(0.65); }
+  35%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  70%  { opacity: 0; transform: translate(-50%, -50%) scale(1.45); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.45); }
+}
+
+.fw-1 { left: 16%; top: 28%; animation-delay: 0ms; }
+.fw-2 { left: 78%; top: 22%; animation-delay: 520ms; }
+.fw-3 { left: 58%; top: 40%; animation-delay: 980ms; }
+.fw-4 { left: 22%; top: 62%; animation-delay: 1420ms; }
+.fw-5 { left: 84%; top: 66%; animation-delay: 1820ms; }
+.fw-6 { left: 46%; top: 18%; animation-delay: 2160ms; }
+
+.fw, .fw::before { animation-play-state: running !important; }
